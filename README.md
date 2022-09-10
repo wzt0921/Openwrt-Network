@@ -64,9 +64,9 @@
    make menuconfig
    ```
 
-   以红米AC2100为例，按下图选择路由器（根据自己的路由器设置前三项），如果找不到可能不支持该路由器
+   以红米AC2100为例，按下图选择路由器（**根据自己的路由器设置前三项**），如果找不到可能不支持该路由器
 
-   ![选择设备](https://github.com/wzt0921/Openwrt-FZU-Network/blob/main/images/%E9%80%89%E6%8B%A9%E8%AE%BE%E5%A4%87.PNG)
+   ![选择设备](https://github.com/wzt0921/Openwrt-Network/blob/main/images/%E9%80%89%E6%8B%A9%E8%AE%BE%E5%A4%87.PNG)
 
    接着，选择需要安装的模块
 
@@ -109,7 +109,7 @@
 
    （1）进入 OpenWRT 系统设置, 勾选 Enable NTP client（启用 NTP 客户端）和 Provide NTP server（作为 NTP 服务器提供服务）。NTP server candidates（候选 NTP 服务器）四个框框分别填写 ntp1.aliyun.com、time1.cloud.tencent.com、stdtime.gov.hk 、pool.ntp.org，如下图
 
-   ![NTP设置](https://github.com/wzt0921/Openwrt-FZU-Network/blob/main/images/NTP%E8%AE%BE%E7%BD%AE.PNG)
+   ![NTP设置](https://github.com/wzt0921/Openwrt-Network/blob/main/images/NTP%E8%AE%BE%E7%BD%AE.PNG)
 
    （2）防火墙添加以下自定义规则
 
