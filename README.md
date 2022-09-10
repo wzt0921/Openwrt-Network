@@ -186,6 +186,4 @@ FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
 
 ## 致谢
 
-**openwrt源码来源于：**[Lean](https://github.com/coolsnowwolf/lede)
-
-**参考来源于：**[EOYOHOO/Campus-network](https://github.com/EOYOHOO/Campus-network)
+**openwrt源码来源于：**[Lean](https://github.com/coolsnowwolf/lede)<br>**参考来源于：**[EOYOHOO/Campus-network](https://github.com/EOYOHOO/Campus-network)<br>**ua2f来源于：** [Zxilly/UA2F](https://github.com/Zxilly/UA2F)<br>**修改 IPID 来源于：** [CHN-beta/rkp-ipid](https://github.com/CHN-beta/rkp-ipid)
