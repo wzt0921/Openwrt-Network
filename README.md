@@ -51,7 +51,7 @@
 
    以红米AC2100为例，按下图选择路由器（根据自己的路由器设置前三项）
 
-   ![选择设备](E:\Openwrt-FZU-Network\images\选择设备.PNG)
+   ![选择设备](https://github.com/wzt0921/Openwrt-FZU-Network/blob/main/images/%E9%80%89%E6%8B%A9%E8%AE%BE%E5%A4%87.PNG)
 
    ```
    # 勾选上ua2f
@@ -80,91 +80,97 @@
    make V=s -j1
    ```
 
+   若为二次编译
+
+   ```
+   make V=s -j$(nproc)
+   ```
+
 7. 根据路由器型号自行刷入编译好的固件，这里不提供具体教程
 
 8. 防检测配置
 
    （1）进入 OpenWRT 系统设置, 勾选 Enable NTP client（启用 NTP 客户端）和 Provide NTP server（作为 NTP 服务器提供服务）。NTP server candidates（候选 NTP 服务器）四个框框分别填写 ntp1.aliyun.com、time1.cloud.tencent.com、stdtime.gov.hk 、pool.ntp.org，如下图
 
-   ![NTP设置](E:\Openwrt-FZU-Network\images\NTP设置.PNG)
+   ![NTP设置](https://github.com/wzt0921/Openwrt-FZU-Network/blob/main/images/NTP%E8%AE%BE%E7%BD%AE.PNG)
 
-​	（2）防火墙添加以下自定义规则
+   （2）防火墙添加以下自定义规则
 
-```
-iptables -t nat -A PREROUTING -p udp --dport 53 -j REDIRECT --to-ports 53
+   ```
+   iptables -t nat -A PREROUTING -p udp --dport 53 -j REDIRECT --to-ports 53
+   
+   iptables -t nat -A PREROUTING -p tcp --dport 53 -j REDIRECT --to-ports 53
+   
+   # 通过 rkp-ipid 设置 IPID
+   
+   # 若没有加入rkp-ipid模块，此部分不需要加入
+   
+   iptables -t mangle -N IPID_MOD
+   
+   iptables -t mangle -A FORWARD -j IPID_MOD
+   
+   iptables -t mangle -A OUTPUT -j IPID_MOD
+   
+   iptables -t mangle -A IPID_MOD -d 0.0.0.0/8 -j RETURN
+   
+   iptables -t mangle -A IPID_MOD -d 127.0.0.0/8 -j RETURN
+   
+   #由于本校局域网是A类网，所以我将这一条注释掉了，具体要不要注释结合你所在的校园网
+   
+   # iptables -t mangle -A IPID_MOD -d 10.0.0.0/8 -j RETURN
+   
+   iptables -t mangle -A IPID_MOD -d 172.16.0.0/12 -j RETURN
+   
+   iptables -t mangle -A IPID_MOD -d 192.168.0.0/16 -j RETURN
+   
+   iptables -t mangle -A IPID_MOD -d 255.0.0.0/8 -j RETURN
+   
+   iptables -t mangle -A IPID_MOD -j MARK --set-xmark 0x10/0x10
+   
+   # 防时钟偏移检测
+   
+   iptables -t nat -N ntp_force_local
+   
+   iptables -t nat -I PREROUTING -p udp --dport 123 -j ntp_force_local
+   
+   iptables -t nat -A ntp_force_local -d 0.0.0.0/8 -j RETURN
+   
+   iptables -t nat -A ntp_force_local -d 127.0.0.0/8 -j RETURN
+   
+   iptables -t nat -A ntp_force_local -d 192.168.0.0/16 -j RETURN
+   
+   iptables -t nat -A ntp_force_local -s 192.168.0.0/16 -j DNAT --to-destination 192.168.1.1
+   
+   # 通过 iptables 修改 TTL 值
+   
+   iptables -t mangle -A POSTROUTING -j TTL --ttl-set 64
+   
+   # iptables 拒绝 AC 进行 Flash 检测
+   
+   iptables -I FORWARD -p tcp --sport 80 --tcp-flags ACK ACK -m string --algo bm --string " src=\"http://1.1.1." -j DROP
+   ```
 
-iptables -t nat -A PREROUTING -p tcp --dport 53 -j REDIRECT --to-ports 53
+   （3）UA2F配置
 
-# 通过 rkp-ipid 设置 IPID
-
-# 若没有加入rkp-ipid模块，此部分不需要加入
-
-iptables -t mangle -N IPID_MOD
-
-iptables -t mangle -A FORWARD -j IPID_MOD
-
-iptables -t mangle -A OUTPUT -j IPID_MOD
-
-iptables -t mangle -A IPID_MOD -d 0.0.0.0/8 -j RETURN
-
-iptables -t mangle -A IPID_MOD -d 127.0.0.0/8 -j RETURN
-
-#由于本校局域网是A类网，所以我将这一条注释掉了，具体要不要注释结合你所在的校园网
-
-# iptables -t mangle -A IPID_MOD -d 10.0.0.0/8 -j RETURN
-
-iptables -t mangle -A IPID_MOD -d 172.16.0.0/12 -j RETURN
-
-iptables -t mangle -A IPID_MOD -d 192.168.0.0/16 -j RETURN
-
-iptables -t mangle -A IPID_MOD -d 255.0.0.0/8 -j RETURN
-
-iptables -t mangle -A IPID_MOD -j MARK --set-xmark 0x10/0x10
-
-# 防时钟偏移检测
-
-iptables -t nat -N ntp_force_local
-
-iptables -t nat -I PREROUTING -p udp --dport 123 -j ntp_force_local
-
-iptables -t nat -A ntp_force_local -d 0.0.0.0/8 -j RETURN
-
-iptables -t nat -A ntp_force_local -d 127.0.0.0/8 -j RETURN
-
-iptables -t nat -A ntp_force_local -d 192.168.0.0/16 -j RETURN
-
-iptables -t nat -A ntp_force_local -s 192.168.0.0/16 -j DNAT --to-destination 192.168.1.1
-
-# 通过 iptables 修改 TTL 值
-
-iptables -t mangle -A POSTROUTING -j TTL --ttl-set 64
-
-# iptables 拒绝 AC 进行 Flash 检测
-
-iptables -I FORWARD -p tcp --sport 80 --tcp-flags ACK ACK -m string --algo bm --string " src=\"http://1.1.1." -j DROP
-```
-
-（3）UA2F配置
-
-```
-# 开机自启
-uci set ua2f.enabled.enabled=1
-# 自动配置防火墙（默认开启）（建议开启）
-uci set ua2f.firewall.handle_fw=1
-uci set ua2f.firewall.handle_tls=1
-uci set ua2f.firewall.handle_mmtls=1
-uci set ua2f.firewall.handle_intranet=1
-# 保存配置
-uci commit ua2f
-
-操作：# 开机自启
-service ua2f enable
-# 启动ua2f
-service ua2f start
-
-# 手动关闭ua2f
-service ua2f stop
-```
+   ```
+   # 开机自启
+   uci set ua2f.enabled.enabled=1
+   # 自动配置防火墙（默认开启）（建议开启）
+   uci set ua2f.firewall.handle_fw=1
+   uci set ua2f.firewall.handle_tls=1
+   uci set ua2f.firewall.handle_mmtls=1
+   uci set ua2f.firewall.handle_intranet=1
+   # 保存配置
+   uci commit ua2f
+   
+   操作：# 开机自启
+   service ua2f enable
+   # 启动ua2f
+   service ua2f start
+   
+   # 手动关闭ua2f
+   service ua2f stop		
+   ```
 
 到此就可以进行检测了
 
@@ -177,3 +183,9 @@ FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
 ```
 
 说明配置正确
+
+## 致谢
+
+**openwrt源码来源于：**[Lean](https://github.com/coolsnowwolf/lede)
+
+**参考来源于：**[EOYOHOO/Campus-network](https://github.com/EOYOHOO/Campus-network)
