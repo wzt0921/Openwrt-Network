@@ -184,6 +184,19 @@ FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
 
 说明配置正确
 
+## 注意：
+
+1、翻墙可能会使UA2F失效
+
+2、UA2F只修改HTTP流量，HTTPS是加密的，因此无需修改
+
+3、由于微信mmtls协议的影响，会可能会导致微信图片无法发送等问题，此问题可执行
+
+```
+uci set ua2f.firewall.handle_mmtls=0
+uci commit ua2f 
+```
+
 ## 致谢
 
 **openwrt源码来源于：**[Lean](https://github.com/coolsnowwolf/lede)<br>**参考来源于：**[EOYOHOO/Campus-network](https://github.com/EOYOHOO/Campus-network)<br>**ua2f来源于：** [Zxilly/UA2F](https://github.com/Zxilly/UA2F)<br>**修改 IPID 来源于：** [CHN-beta/rkp-ipid](https://github.com/CHN-beta/rkp-ipid)
