@@ -53,6 +53,8 @@
 
    ![选择设备](https://github.com/wzt0921/Openwrt-FZU-Network/blob/main/images/%E9%80%89%E6%8B%A9%E8%AE%BE%E5%A4%87.PNG)
 
+   接着，选择需要安装的模块
+
    ```
    # 勾选上ua2f
    # network->Routing and Redirection->ua2f
