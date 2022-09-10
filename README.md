@@ -186,6 +186,10 @@ FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
 
 说明配置正确
 
+----------------------------------------------------------------------------------------------------------------------------------------
+
+提供了红米AC2100和小米路由器4A千兆版的固件，采用[Lean](https://github.com/coolsnowwolf/lede)大佬的 Openwrt 源码编译，自己根据教程刷入。
+
 ## 注意：
 
 1、翻墙可能会使UA2F失效
@@ -199,6 +203,8 @@ uci set ua2f.firewall.handle_mmtls=0
 uci commit ua2f 
 ```
 
+4、提供的小米路由器4A千兆版固件存在重启后WAN口PPPOE无法拨号的问题，可在WAN口物理设置中更改为其他接口再改回来。若要自己编译小米路由器4A千兆版固件请参考[恩山论坛](https://www.right.com.cn/FORUM/forum.php?mod=viewthread&tid=4052254)修改源码，此方法可能不适用于2022年之后生产的小米路由器4A千兆版路由器（未测试），**请生产日期在2022年1月之后的小米路由器4A千兆版慎重刷机**！！！！！！
+
 ## 致谢
 
-**openwrt源码来源于：**[Lean](https://github.com/coolsnowwolf/lede)<br>**参考来源于：**[EOYOHOO/Campus-network](https://github.com/EOYOHOO/Campus-network)<br>**ua2f来源于：** [Zxilly/UA2F](https://github.com/Zxilly/UA2F)<br>**修改 IPID 来源于：** [CHN-beta/rkp-ipid](https://github.com/CHN-beta/rkp-ipid)
+**openwrt源码来源于：**[Lean](https://github.com/coolsnowwolf/lede)<br>**参考来源于：**[EOYOHOO/Campus-network](https://github.com/EOYOHOO/Campus-network)<br>**ua2f来源于：** [Zxilly/UA2F](https://github.com/Zxilly/UA2F)<br>**修改 IPID 来源于：** [CHN-beta/rkp-ipid](https://github.com/CHN-beta/rkp-ipid)<br>**小米路由器4A千兆版源码修改来源于**：[恩山论坛](https://www.right.com.cn/FORUM/forum.php?mod=viewthread&tid=4052254)
