@@ -64,7 +64,7 @@
    make menuconfig
    ```
 
-   以红米AC2100为例，按下图选择路由器（根据自己的路由器设置前三项）
+   以红米AC2100为例，按下图选择路由器（根据自己的路由器设置前三项），如果找不到可能不支持该路由器
 
    ![选择设备](https://github.com/wzt0921/Openwrt-FZU-Network/blob/main/images/%E9%80%89%E6%8B%A9%E8%AE%BE%E5%A4%87.PNG)
 
