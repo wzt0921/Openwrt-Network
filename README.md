@@ -162,7 +162,7 @@
    
    # 通过 iptables 修改 TTL 值
    
-   iptables -t mangle -A POSTROUTING -j TTL --ttl-set 64
+   iptables -t mangle -A POSTROUTING -p !icmp -j TTL --ttl-set 64
    
    # iptables 拒绝 AC 进行 Flash 检测
    
