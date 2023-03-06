@@ -62,14 +62,15 @@
    ```
    # 勾选上ua2f
    # network->Routing and Redirection->ua2f
-   # 勾选上ipid（不建议勾选）
-   # kernel-modules->Other modules->kmod-rkp-ipid
-   #在openwrt目录下
-   nano .config
+   #在/openwrt/target/linux/ramips/mt7621目录下修改内核配置文件
+   nano config-5.4
    #加入一句
    CONFIG_NETFILTER_NETLINK_GLUE_CT=y
    # 选上模块
    make menuconfig
+   # 勾选上ipid（不建议勾选）
+   # kernel-modules->Other modules->kmod-rkp-ipid
+   
    # network->firewall->iptables-mod-filter
    # network->firewall->iptables-mod-ipopt
    # network->firewall->iptables-mod-u32
