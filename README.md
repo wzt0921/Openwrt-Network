@@ -44,7 +44,7 @@
 
    ```
    git clone https://github.com/Zxilly/UA2F package/UA2F
-   git clone https://github.com/EOYOHOO/rkp-ipid.git package/rkp-ipid
+   git clone https://github.com/EOYOHOO/rkp-ipid.git package/rkp-ipid（不建议加入）
    ```
 
 5. 配置
@@ -62,7 +62,7 @@
    ```
    # 勾选上ua2f
    # network->Routing and Redirection->ua2f
-   # 勾选上ipid
+   # 勾选上ipid（不建议勾选）
    # kernel-modules->Other modules->kmod-rkp-ipid
    #在openwrt目录下
    nano .config
