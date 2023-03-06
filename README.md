@@ -62,12 +62,17 @@
    ```
    # 勾选上ua2f
    # network->Routing and Redirection->ua2f
-   #在/openwrt/target/linux/ramips/mt7621目录下修改内核配置文件
+   # 保存并退出
+   
+   # 在lede/target/linux/ramips/mt7621目录下修改内核配置文件
    nano config-5.4
-   #加入一句
+   # 加入一句
    CONFIG_NETFILTER_NETLINK_GLUE_CT=y
+   # 保存并退出
+   
    # 选上模块
    make menuconfig
+   
    # 勾选上ipid（不建议勾选）
    # kernel-modules->Other modules->kmod-rkp-ipid
    
@@ -77,7 +82,7 @@
    # network->firewall->iptables-mod-conntrack-extra
    # kernel modules->Netfilter Extensions->kmod-ipt-u32
    # kernel modules->Netfilter Extensions->kmod-ipt-ipopt
-   #若无其他要求，即可准备编译
+   # 若无其他要求，即可准备编译
    ```
 
 6. 下载 dl 库，编译固件 ，预计时间较长（-j 后面是线程数，第一次编译推荐用单线程）
