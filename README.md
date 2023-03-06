@@ -45,7 +45,7 @@
 4. 加入UA2F模块和RKP-IPID模块
 
    ```
-   git clone https://github.com/EOYOHOO/UA2F.git package/UA2F
+   git clone https://github.com/Zxilly/UA2F package/UA2F
    git clone https://github.com/EOYOHOO/rkp-ipid.git package/rkp-ipid
    ```
 
