@@ -14,8 +14,6 @@
 
 4. UA2F只修改HTTP流量，HTTPS是加密的，因此无需修改
 
-7. 提供的小米路由器4A千兆版固件存在重启后WAN口PPPOE无法拨号的问题，可在WAN口物理设置中更改为其他接口再改回来。若要自己编译小米路由器4A千兆版固件请参考[恩山论坛](https://www.right.com.cn/FORUM/forum.php?mod=viewthread&tid=4052254)修改源码，此方法可能不适用于2022年之后生产的小米路由器4A千兆版路由器（未测试），**请生产日期在2022年1月之后的小米路由器4A千兆版慎重刷机**！！！！！！
-
 ## 一、编译命令
 
 1. 首先装好 Linux 系统，推荐 Debian 11 或 Ubuntu LTS
@@ -202,7 +200,7 @@ FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
 
 ----------------------------------------------------------------------------------------------------------------------------------------
 
-提供了红米AC2100和小米路由器4A千兆版的固件，采用[Lean](https://github.com/coolsnowwolf/lede)大佬的 Openwrt 源码编译，自己根据教程刷入。
+提供了红米AC2100的固件，采用[Lean](https://github.com/coolsnowwolf/lede)大佬的 Openwrt 源码编译，自己根据教程刷入。
 
 ## 致谢
 
