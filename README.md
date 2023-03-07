@@ -85,19 +85,13 @@
    # 若无其他要求，即可准备编译
    ```
 
-6. 下载 dl 库，编译固件 ，预计时间较长（-j 后面是线程数，第一次编译推荐用单线程）
+6. 下载 dl 库，编译固件 ，预计时间较长（-j 后面是线程数）
 
    ```
    make download -j8
-   make V=s -j1
-   ```
-
-   若为二次编译
-
-   ```
    make V=s -j$(nproc)
    ```
-
+   
    编译完成后输出路径：bin/targets
 
 7. 根据路由器型号自行刷入编译好的固件，这里不提供具体教程
@@ -110,11 +104,7 @@
 
    （2）防火墙添加以下自定义规则
 
-   ```
-   iptables -t nat -A PREROUTING -p udp --dport 53 -j REDIRECT --to-ports 53
-   
-   iptables -t nat -A PREROUTING -p tcp --dport 53 -j REDIRECT --to-ports 53
-   
+   ```   
    # 通过 rkp-ipid 设置 IPID
    
    # 若没有加入rkp-ipid模块，此部分不需要加入
@@ -161,7 +151,7 @@
    
    iptables -t mangle -A POSTROUTING -j TTL --ttl-set 64
    
-   # iptables 拒绝 AC 进行 Flash 检测
+   # iptables 拒绝 AC 进行 Flash 检测（不建议加入）
    
    iptables -I FORWARD -p tcp --sport 80 --tcp-flags ACK ACK -m string --algo bm --string " src=\"http://1.1.1." -j DROP
    ```
@@ -179,7 +169,8 @@
    # 保存配置
    uci commit ua2f
    
-   操作：# 开机自启
+   ua2f服务相关操作：
+   # 开机自启
    service ua2f enable
    # 启动ua2f
    service ua2f start
