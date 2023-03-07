@@ -145,8 +145,6 @@
    
    iptables -t nat -A ntp_force_local -s 192.168.0.0/16 -j DNAT --to-destination 192.168.1.1
    
-   # 最后的 192.168.1.1 需要修改为路由器网关地址
-   
    # 通过 iptables 修改 TTL 值
    
    iptables -t mangle -A POSTROUTING -j TTL --ttl-set 64
