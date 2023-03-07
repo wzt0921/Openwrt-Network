@@ -12,8 +12,6 @@
 
 3. 默认登陆IP 192.168.1.1 密码 password
 
-4. UA2F只修改HTTP流量，HTTPS是加密的，因此无需修改
-
 ## 一、编译命令
 
 1. 首先装好 Linux 系统，推荐 Debian 11 或 Ubuntu LTS
