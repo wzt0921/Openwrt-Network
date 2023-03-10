@@ -187,7 +187,7 @@ FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
 
 说明配置正确
 
-如果开了代理可能会显示真实UA，请确认与节点间是否是加密通信。如果是加密通信则无影响，请在没有开全局代理的情况下尝试以下链接，以检测UA2F是否配置成功
+如果开了代理可能会显示真实UA，可尝试以下链接，以检测UA2F是否配置成功
 
 [UA检测2](http://9n4.cn/)
 
