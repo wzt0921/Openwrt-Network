@@ -145,7 +145,7 @@
    
    # 通过 iptables 修改 TTL 值
    
-   iptables -t mangle -A POSTROUTING -j TTL --ttl-set 64
+   iptables -t mangle -A POSTROUTING ! -p icmp -j TTL --ttl-set 64
    
    # iptables 拒绝 AC 进行 Flash 检测（不建议加入）
    
@@ -155,9 +155,8 @@
    （3）UA2F配置
 
    ```
-   # 开机自启
-   uci set ua2f.enabled.enabled=1
    # 配置
+   uci set ua2f.enabled.enabled=1
    uci set ua2f.firewall.handle_fw=1
    uci set ua2f.firewall.handle_tls=0
    uci set ua2f.firewall.handle_mmtls=0
